@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataObjects\Resume;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -11,10 +12,10 @@ class ResumeController extends Controller
 {
     public function index(Factory $view)
     {
-        $resume = Storage::get('resume.json');
+        $resume = Storage::disk('resumes')->get('resume.json');
 
-        dd($resume);
+        $resumeData = json_decode($resume, true);
 
-        return $view->make('resume');
+        return $view->make('resume', ['resume' => Resume::fromArray($resumeData)]);
     }
 }
