@@ -1,5 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ResumeController;
 
-Route::get('/', [\App\Http\Controllers\ResumeController::class, 'index']);
+Route::get('/', [ResumeController::class, 'index']);
+Route::post('/download', [ResumeController::class, 'download']);
